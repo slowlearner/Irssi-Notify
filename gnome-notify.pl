@@ -20,11 +20,11 @@ sub send_gnome_notification {
 
 sub event_privmsg {
     my ($server, $data, $nick, $address) = @_;
-    
     #how do i get my own nick????
     my $own_nick = 'slowlearner';
-    if($data =~ /.*?$own_nick.*/ &&  $data =~ /^(.*)\s:(.*)/) {
-        send_gnome_notification($1, $nick. " said: " .$2);
+    if($data =~ /$own_nick/i && $data =~ /^(.*?):(.*)/) {
+        my($source, $msg) = split(':', $data, 2);
+        send_gnome_notification($source,  "[$nick] $msg");
     }
 }
 Irssi::signal_add("event privmsg", "event_privmsg")
