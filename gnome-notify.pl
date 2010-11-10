@@ -13,6 +13,8 @@ $VERSION = '1.00';
 
 sub send_gnome_notification {
     my($from, $msg) = @_;
+    $from = add_slashes($from);
+    $msg = add_slashes($msg);
     system("notify-send \"$from\" \"$msg\"");
 }
 
@@ -24,5 +26,13 @@ sub event_privmsg {
         my($source, $msg) = split(':', $data, 2);
         send_gnome_notification($source,  "[$nick] $msg");
     }
+}
+
+sub add_slashes {
+    my($text) = shift;
+    $text =~ s/\\/\\\\/g;
+    $text =~ s/"/\\"/g;
+    $text =~ s/\\0/\\\\0/g;
+    return $text;
 }
 Irssi::signal_add("event privmsg", "event_privmsg")

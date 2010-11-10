@@ -1,5 +1,12 @@
 Warning: Noob script!!!!!!
 Use at your own risk.
-I have no perl programming whatsoever  
+I have no perl programming experience of whatsoever  
 before this script.
+
+
+Installation:
+Make sure you have installed libnotify-bin.
+On ubuntu simply:
+
+$ sudo apt-get install libnotify-bin
 
